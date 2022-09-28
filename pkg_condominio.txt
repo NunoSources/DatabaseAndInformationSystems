@@ -1,0 +1,49 @@
+CREATE OR REPLACE PACKAGE pkg_funcionario IS
+
+  -- Todas as operações lançam exceções para sinalizar casos de erro.
+  --
+  -- Exceção Mensagem
+  --  -20001 Já existe um funcionário com esse número.
+  --  -20002 Vencimento de funcionário tem de ser positivo.
+  --  -20003 Novo vencimento tem de ser superior ao atual.
+  --  -20004 Funcionário a remover não existe.
+
+  -- Cria um novo registo de funcionário.
+  PROCEDURE insere (
+    numero_in     IN funcionario.numero%TYPE,
+    nome_in       IN funcionario.nome%TYPE,
+    vencimento_in IN funcionario.vencimento%TYPE);
+
+  -- Atualiza o vencimento de um funcionário.
+  PROCEDURE atualiza (
+    numero_in     IN funcionario.numero%TYPE,
+    vencimento_in IN funcionario.vencimento%TYPE);
+
+  -- Remove um funcionário já existente.
+  PROCEDURE remove (
+    numero_in IN funcionario.numero%TYPE);
+
+  -- Operações extra.
+
+  -- Remove todos os funcionários, um de cada vez.
+  PROCEDURE remove_todos;
+
+  -- Soma um dado número de melhores vencimentos de funcionários.
+  FUNCTION soma_melhores_vencimentos (
+    quantos_in IN NUMBER)
+    RETURN NUMBER;
+
+  -- Lista um dado número de funcionários com os melhores vencimentos.
+  FUNCTION lista_melhores_vencimentos (
+    quantos_in IN NUMBER)
+    RETURN SYS_REFCURSOR;
+
+  -- Devolve 'elevado' se um vencimento for superior ou igual a um dado valor
+  -- de referência, ou 'reduzido' no caso contrário.
+  FUNCTION qualifica_vencimento (
+    vencimento_in IN funcionario.vencimento%TYPE,
+    referencia_in IN funcionario.vencimento%TYPE)
+    RETURN VARCHAR2;
+
+END pkg_funcionario;
+/
