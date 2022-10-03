@@ -4,7 +4,7 @@ apartamentos. O resultado deve vir ordenado pelo piso e letra de forma descenden
 uma interrogação com apenas um SELECT.
 */
 
-SElECT P.nif, P.nome, P.piso, P.letra
+SELECT P.nif, P.nome, P.piso, P.letra
 	FROM proprietario P, administra AD
 	WHERE(P.nif = AD.proprietario)
 	AND(AD.ano > 2000)
@@ -18,7 +18,7 @@ SElECT P.nif, P.nome, P.piso, P.letra
 usar construtores de conjuntos.
 */
 
-SElECT DISTINCT P.nif, P.nome
+SELECT DISTINCT P.nif, P.nome
 	FROM proprietario P, administra AD
 	WHERE(P.nif = AD.proprietario)
 	AND(AD.ano BETWEEN 2000 AND 2010)
